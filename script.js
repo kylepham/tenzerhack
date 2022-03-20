@@ -243,3 +243,7 @@ document.getElementById("backto_menu").addEventListener("click", () => {
   document.querySelector(".menu").style.visibility = "visible";
   document.querySelector(".result").style.visibility = "hidden";
 });
+
+document.getElementById("quit").addEventListener("click", () => {
+  window.close();
+});
