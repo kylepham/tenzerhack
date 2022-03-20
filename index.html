@@ -41,7 +41,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -54,12 +59,12 @@
         <button>How to play</button>
       </div>
       <div class="countdown">
-        <p>Prepare yourself!</p>
+        <h5 id="round" style="text-decoration: underline">Round</h5>
         <p id="question"></p>
         <p id="second"></p>
       </div>
       <div class="result">
-        <h1 id="correctness">You are correct!</h1>
+        <h1 id="correctness"></h1>
         <button id="replay_button">Replay</button>
       </div>
     </div>

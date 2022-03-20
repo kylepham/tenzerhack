@@ -1,10 +1,28 @@
 body {
+  font-family: "Nunito"; /*a name to be used later*/
   margin: 0;
+  font-size: 4rem;
 }
 
-/* * {
-  user-select: none;
-} */
+button {
+  font-size: 4rem;
+  background-color: yellow;
+  border-color: transparent;
+  border-radius: 0.75em;
+  padding: 0.25em 0.5em;
+  margin: 0.5em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:hover::before {
+  /* position: absolute; */
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
 
 .container {
   position: relative;

@@ -2,7 +2,9 @@ const ROUND = 5;
 let roundCount;
 let roundCorrect;
 
-const SEC = 1;
+const SEC = 3;
+let VEL_Y; // -0.4
+let GRAV_Y; // 0.2
 let isPlaying = false;
 
 let Engine = Matter.Engine;
@@ -111,11 +113,14 @@ function setup() {
   let b = document.getElementById("canvas");
   let w = b.clientWidth;
   let h = b.clientHeight;
-  console.log(w, h);
   canvasWidth = w;
   canvasHeight = h;
   boxWidth = w / 9;
   boxHeight = w / 9;
+
+  // idk why
+  VEL_Y = -h / (821 / 0.33);
+  GRAV_Y = h / ((821 / 0.33) * 2);
 
   let canvas = createCanvas(w, h);
   canvas.parent("canvas");
@@ -146,6 +151,8 @@ function mousePressed() {
 
 function draw() {
   if (!isPlaying) return;
+  background(51);
+
   if (boxes.length === 0) {
     console.log("stop");
     if (roundCount < ROUND) {
@@ -154,15 +161,11 @@ function draw() {
     } else showResult();
   }
 
-  background(200);
-  // fill(255);
-  // rect(left.position.x, left.position.y, 2, 69420);
-  // rect(right.position.x, right.position.y, 2, canvasHeight);
   for (let i = 0; i < boxes.length; i++) boxes[i].draw();
 
   for (let i = 0; i < boxes.length; i++)
     if (boxes[i].isOffScreen()) {
-      boxes.splice(i);
+      boxes.splice(i, 1);
     }
 }
 
@@ -171,8 +174,8 @@ function draw() {
 document.getElementById("play_button").addEventListener("click", () => {
   document.querySelector(".menu").style.visibility = "hidden";
   document.querySelector(".countdown").style.visibility = "visible";
-
   initGame();
+  document.getElementById("round").innerHTML = `Round ${roundCount}`;
   document.getElementById(
     "question"
   ).innerHTML = `Which picture depicts ${correctAnswer}?`;
@@ -182,7 +185,7 @@ document.getElementById("play_button").addEventListener("click", () => {
   let x = setInterval(function () {
     if (seconds < 0) {
       clearInterval(x);
-      world.gravity.y = 0.2;
+      world.gravity.y = GRAV_Y;
       document.getElementById("second").innerHTML = "";
       isPlaying = true;
       for (let i = 0; i < boxes.length; i++) boxes[i].applyForce();
@@ -205,11 +208,12 @@ document.getElementById("replay_button").addEventListener("click", () => {
   ).innerHTML = `Which picture depicts ${correctAnswer}?`;
   let seconds = SEC;
   document.querySelector(".countdown").style.visibility = "visible";
+  document.getElementById("round").innerHTML = `Round ${roundCount}`;
   // Update the count down every 1 second
   let x = setInterval(function () {
     if (seconds < 0) {
       clearInterval(x);
-      world.gravity.y = 0.2;
+      world.gravity.y = GRAV_Y;
       document.getElementById("second").innerHTML = "";
 
       isPlaying = true;

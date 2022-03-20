@@ -4,7 +4,6 @@ class ImageMatter {
     this.image = loadImage(imageDir);
     this.body = Bodies.rectangle(x, y, width, height);
     Body.setMass(this.body, 7);
-    // Body.applyForce(this.body, { x, y }, { x: 0, y: -0.15 });
     Composite.add(world, this.body);
   }
 
@@ -59,7 +58,7 @@ class ImageMatter {
   isOffScreen() {
     // return false;
     return (
-      this.body.position.y > canvasHeight + 50
+      this.body.position.y > canvasHeight
       // this.body.position.y < 0 ||
       // this.body.position.x < 0 ||
       // this.body.position.x > canvasWidth

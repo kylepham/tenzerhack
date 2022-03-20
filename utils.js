@@ -25,8 +25,8 @@ const initGame = () => {
   ImageMatter.destroy();
   boxes = [];
 
-  left = Bodies.rectangle(1, 1, 1, canvasHeight * 2, { isStatic: true });
-  right = Bodies.rectangle(canvasWidth - boxWidth / 4, 0, boxWidth / 4, 69420, {
+  left = Bodies.rectangle(1, 1, 1, 69420, { isStatic: true });
+  right = Bodies.rectangle(canvasWidth - boxWidth / 4, 0, boxWidth / 2, 69420, {
     isStatic: true,
   });
 
@@ -37,18 +37,18 @@ const initGame = () => {
 
   forces = [
     [
-      { x: -0.1, y: -0.3 },
-      { x: 0, y: -0.3 },
-      { x: 0, y: -0.3 },
-      { x: 0.1, y: -0.3 },
+      { x: -0.1, y: VEL_Y },
+      { x: 0, y: VEL_Y },
+      { x: 0, y: VEL_Y },
+      { x: 0.1, y: VEL_Y },
     ],
   ];
   for (let i = 0; i < ROUND - 1; i++) {
     forces.push([
-      { x: -0.3 + Math.random() * 0.6, y: -0.2 - Math.random() * 0.12 },
-      { x: -0.3 + Math.random() * 0.6, y: -0.2 - Math.random() * 0.12 },
-      { x: -0.3 + Math.random() * 0.6, y: -0.2 - Math.random() * 0.12 },
-      { x: -0.3 + Math.random() * 0.6, y: -0.2 - Math.random() * 0.12 },
+      { x: -0.3 + Math.random() * 0.6, y: VEL_Y - Math.random() * 0.12 },
+      { x: -0.3 + Math.random() * 0.6, y: VEL_Y - Math.random() * 0.12 },
+      { x: -0.3 + Math.random() * 0.6, y: VEL_Y - Math.random() * 0.12 },
+      { x: -0.3 + Math.random() * 0.6, y: VEL_Y - Math.random() * 0.12 },
     ]);
   }
 
@@ -80,8 +80,8 @@ const nextRound = () => {
   ImageMatter.destroy();
   boxes = [];
 
-  left = Bodies.rectangle(0, 0, 2, 2000, { isStatic: true });
-  right = Bodies.rectangle(canvasWidth - boxWidth / 4, 0, boxWidth / 4, 69420, {
+  left = Bodies.rectangle(1, 1, 1, 69420, { isStatic: true });
+  right = Bodies.rectangle(canvasWidth - boxWidth / 4, 0, boxWidth / 2, 69420, {
     isStatic: true,
   });
 
@@ -109,11 +109,13 @@ const nextRound = () => {
   document.getElementById(
     "question"
   ).innerHTML = `Which picture depicts ${correctAnswer}?`;
+  document.getElementById("round").innerHTML = `Round ${roundCount}`;
+
   let seconds = SEC;
   let x = setInterval(function () {
     if (seconds < 0) {
       clearInterval(x);
-      world.gravity.y = 0.2;
+      world.gravity.y = GRAV_Y;
       document.getElementById("second").innerHTML = "";
 
       isPlaying = true;
