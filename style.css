@@ -17,13 +17,6 @@ button:hover {
   cursor: pointer;
 }
 
-button:hover::before {
-  /* position: absolute; */
-  width: 100px;
-  height: 100px;
-  background-color: aqua;
-}
-
 .container {
   position: relative;
   width: 100vw;
