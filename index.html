@@ -47,7 +47,7 @@
       href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -57,16 +57,46 @@
       <div class="menu">
         <h1 class="game_title">DePauw Ninja</h1>
         <button id="play_button">Play</button>
-        <button>How to play</button>
+        <button id="howto_button">How to play</button>
+      </div>
+      <div class="howto">
+        <p>
+          Inspired by Fruit Ninja, we created a simpler version and named it
+          DePauw Ninja.
+        </p>
+        <p>
+          When the game starts, you will play through 5 rounds and guess the
+          name of different buildings at DePauw by clicking the pictures of it.
+        </p>
+        <p>
+          In each round, you will be given the name of a random building, and 4
+          pictures of 4 different buildings are tossed. Your job is to click on
+          the correct one before it falls off the screen.
+        </p>
+        <button id="howto_back">⇦</button>
       </div>
       <div class="countdown">
-        <h5 id="round" style="text-decoration: underline">Round</h5>
-        <p id="question"></p>
+        <h5 id="round" style="text-decoration: underline">
+          Don't Inspect ME!!!!
+        </h5>
+        <p id="question">Don't Inspect ME!!!!</p>
         <p id="second"></p>
       </div>
+      <div class="answer">
+        <p id="thisis">Don't Inspect ME!!!!</p>
+        <img
+          src=""
+          alt="Don't Inspect ME!!!!"
+          id="img_answer"
+          style="height: 30%; aspect-ratio: 1/1"
+        />
+      </div>
       <div class="result">
-        <h1 id="correctness"></h1>
-        <button id="replay_button">Replay</button>
+        <h1 id="correctness">Don't Inspect ME!!!!</h1>
+        <div style="flex-direction: row">
+          <button id="replay_button">Replay</button>
+          <button id="backto_menu">Back to Menu</button>
+        </div>
       </div>
     </div>
   </body>

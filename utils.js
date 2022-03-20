@@ -30,8 +30,6 @@ const initGame = () => {
     isStatic: true,
   });
 
-  console.log(left);
-
   Composite.add(world, left);
   Composite.add(world, right);
 
@@ -52,80 +50,117 @@ const initGame = () => {
     ]);
   }
 
-  for (let i = 0; i < 4; i++)
+  let correctAnswerDirs = [];
+
+  for (let i = 0; i < 4; i++) {
+    let dir = randomSelection(dict[selectedDictKeys[i]], 1)[0];
+    correctAnswerDirs.push(dir);
     boxes.push(
       new ImageMatter(
         boxWidth * (2 * i + 1),
         canvasHeight,
         boxWidth,
         boxHeight,
-        randomSelection(dict[selectedDictKeys[i]], 1)[0],
+        dir,
         i
       )
     );
-  console.log(Composite.allBodies(world));
+  }
 
   let correctKey = randomSelection(selectedDictKeys, 1)[0];
   correctSelectedIndex = selectedDictKeys.indexOf(correctKey);
   correctAnswer = buildingNames[dictKeys.indexOf(correctKey)];
-  console.log(boxes, selectedDictKeys, correctAnswer);
+  correctAnswerDir = correctAnswerDirs[correctSelectedIndex];
+  // console.log(boxes, selectedDictKeys, correctAnswer, correctAnswerDir);
 };
 
 const nextRound = () => {
-  roundCount++;
-  alreadyChose = false;
-  correctness = undefined;
-  world.gravity.y = 0;
-  selectedDictKeys = randomSelection(dictKeys, 4);
-  ImageMatter.destroy();
-  boxes = [];
-
-  left = Bodies.rectangle(1, 1, 1, 69420, { isStatic: true });
-  right = Bodies.rectangle(canvasWidth - boxWidth / 4, 0, boxWidth / 2, 69420, {
-    isStatic: true,
-  });
-
-  Composite.add(world, left);
-  Composite.add(world, right);
-
-  for (let i = 0; i < 4; i++)
-    boxes.push(
-      new ImageMatter(
-        boxWidth * (2 * i + 1),
-        canvasHeight,
-        boxWidth,
-        boxHeight,
-        randomSelection(dict[selectedDictKeys[i]], 1)[0],
-        i
-      )
-    );
-
-  let correctKey = randomSelection(selectedDictKeys, 1)[0];
-  correctSelectedIndex = selectedDictKeys.indexOf(correctKey);
-  correctAnswer = buildingNames[dictKeys.indexOf(correctKey)];
-  console.log(boxes, selectedDictKeys, correctAnswer);
-  document.querySelector(".countdown").style.visibility = "visible";
-
-  document.getElementById(
-    "question"
-  ).innerHTML = `Which picture depicts ${correctAnswer}?`;
-  document.getElementById("round").innerHTML = `Round ${roundCount}`;
+  // show answer
+  isPlaying = false;
+  document.querySelector(".answer").style.visibility = "visible";
+  document.getElementById("thisis").innerHTML = `This is ${correctAnswer}!`;
+  document.getElementById("img_answer").src = correctAnswerDir;
 
   let seconds = SEC;
   let x = setInterval(function () {
     if (seconds < 0) {
       clearInterval(x);
-      world.gravity.y = GRAV_Y;
-      document.getElementById("second").innerHTML = "";
 
-      isPlaying = true;
-      for (let i = 0; i < boxes.length; i++) boxes[i].applyForce();
-      document.querySelector(".countdown").style.visibility = "hidden";
+      document.querySelector(".answer").style.visibility = "hidden";
+      document.getElementById("img_answer").src = "";
+
+      roundCount++;
+      alreadyChose = false;
+      correctness = undefined;
+      world.gravity.y = 0;
+      selectedDictKeys = randomSelection(dictKeys, 4);
+      ImageMatter.destroy();
+      boxes = [];
+
+      left = Bodies.rectangle(1, 1, 1, 69420, { isStatic: true });
+      right = Bodies.rectangle(
+        canvasWidth - boxWidth / 4,
+        0,
+        boxWidth / 2,
+        69420,
+        {
+          isStatic: true,
+        }
+      );
+
+      Composite.add(world, left);
+      Composite.add(world, right);
+
+      let correctAnswerDirs = [];
+
+      for (let i = 0; i < 4; i++) {
+        let dir = randomSelection(dict[selectedDictKeys[i]], 1)[0];
+        correctAnswerDirs.push(dir);
+        boxes.push(
+          new ImageMatter(
+            boxWidth * (2 * i + 1),
+            canvasHeight,
+            boxWidth,
+            boxHeight,
+            dir,
+            i
+          )
+        );
+      }
+
+      let correctKey = randomSelection(selectedDictKeys, 1)[0];
+      correctSelectedIndex = selectedDictKeys.indexOf(correctKey);
+      correctAnswer = buildingNames[dictKeys.indexOf(correctKey)];
+      correctAnswerDir = correctAnswerDirs[correctSelectedIndex];
+      // console.log(boxes, selectedDictKeys, correctAnswer, correctAnswerDir);
+
+      document.querySelector(".countdown").style.visibility = "visible";
+
+      document.getElementById(
+        "question"
+      ).innerHTML = `Which picture depicts ${correctAnswer}?`;
+      document.getElementById("round").innerHTML = `Round ${roundCount}`;
+
+      seconds = SEC;
+      x = setInterval(function () {
+        if (seconds < 0) {
+          clearInterval(x);
+          world.gravity.y = GRAV_Y;
+          document.getElementById("second").innerHTML = "";
+
+          isPlaying = true;
+          for (let i = 0; i < boxes.length; i++) boxes[i].applyForce();
+          document.querySelector(".countdown").style.visibility = "hidden";
+
+          return;
+        }
+
+        document.getElementById("second").innerHTML = seconds;
+        seconds--;
+      }, 1000);
 
       return;
     }
-
-    document.getElementById("second").innerHTML = seconds;
     seconds--;
   }, 1000);
 };

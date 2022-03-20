@@ -40,6 +40,7 @@ let selectedDictKeys = [];
 let dict = {};
 let buildingNames = [];
 let correctSelectedIndex;
+let correctAnswerDir;
 let correctAnswer;
 let correctness;
 
@@ -105,7 +106,7 @@ function preload() {
     reese,
     roy,
   };
-  console.log(dict);
+  // console.log(dict);
 }
 
 function setup() {
@@ -156,7 +157,7 @@ function draw() {
   if (boxes.length === 0) {
     console.log("stop");
     if (roundCount < ROUND) {
-      console.log(roundCount);
+      // console.log(roundCount);
       nextRound();
     } else showResult();
   }
@@ -226,4 +227,19 @@ document.getElementById("replay_button").addEventListener("click", () => {
     document.getElementById("second").innerHTML = seconds;
     seconds--;
   }, 1000);
+});
+
+document.getElementById("howto_button").addEventListener("click", () => {
+  document.querySelector(".howto").style.visibility = "visible";
+  document.querySelector(".menu").style.visibility = "hidden";
+});
+
+document.getElementById("howto_back").addEventListener("click", () => {
+  document.querySelector(".menu").style.visibility = "visible";
+  document.querySelector(".howto").style.visibility = "hidden";
+});
+
+document.getElementById("backto_menu").addEventListener("click", () => {
+  document.querySelector(".menu").style.visibility = "visible";
+  document.querySelector(".result").style.visibility = "hidden";
 });
