@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+}
+
+/* * {
+  user-select: none;
+} */
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* pointer-events: none; */
+}
+
+#canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  /* z-index: 100; */
+  pointer-events: none;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(51, 51, 51);
+  width: 100vw;
+  height: 100vh;
+  color: yellow;
+  /* visibility: hidden; */
+  /* display: none; */
+  /* pointer-events: none; */
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(51, 51, 51);
+  width: 100vw;
+  height: 100vh;
+  color: yellow;
+  visibility: hidden;
+  /* display: none; */
+  /* pointer-events: none; */
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(51, 51, 51);
+  width: 100vw;
+  height: 100vh;
+  color: yellow;
+  visibility: hidden;
+}
